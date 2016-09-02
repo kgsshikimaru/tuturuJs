@@ -31,25 +31,25 @@ export default function fuzbuzTask1() {
 
 
 
-	 const start = new Date().getTime();
-	 const maxCount = 10000;
-	 for (var n = 0; n < maxCount; n++) {
-		try {
-			test(dscount, ['ab___ab__', 'a', 'b'], 2);
-			test(dscount, ['___cd____', 'c', 'd'], 1);
-			test(dscount, ['de_______', 'd', 'e'], 1);
-			test(dscount, ['12_12__12', '1', '2'], 3);
-			test(dscount, ['_ba______', 'a', 'b'], 0);
-			test(dscount, ['_a__b____', 'a', 'b'], 0);
-			test(dscount, ['-ab-аb-ab', 'a', 'b'], 2);
+	 // const start = new Date().getTime();
+	 // const maxCount = 10000;
+	 // for (var n = 0; n < maxCount; n++) {
+			try {
+				test(dscount, ['ab___ab__', 'a', 'b'], 2);
+				test(dscount, ['___cd____', 'c', 'd'], 1);
+				test(dscount, ['de_______', 'd', 'e'], 1);
+				test(dscount, ['12_12__12', '1', '2'], 3);
+				test(dscount, ['_ba______', 'a', 'b'], 0);
+				test(dscount, ['_a__b____', 'a', 'b'], 0);
+				test(dscount, ['-ab-аb-ab', 'a', 'b'], 2);
 
-			console.info("Congratulations! All tests success passed.");
-		} catch(e) {
-			console.error(e);
-		}
-	 }
-	 const time = new Date().getTime() - start;
-	console.log(`скорость выполнения: ${time} ms`);
+				console.info("Congratulations! All tests success passed.");
+			} catch(e) {
+				console.error(e);
+			}
+	//  }
+	//  const time = new Date().getTime() - start;
+	//  console.log(`скорость выполнения: ${time} ms`);
 
 
 
