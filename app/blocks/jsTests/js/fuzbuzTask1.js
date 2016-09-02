@@ -1,4 +1,4 @@
-export default function fuzbuzTask1() {
+export default function () {
 //    Средняя скорость выполнения 10.000 итераций : ~1.800 ms
     function dscount(string, s1, s2) {
         const lowerString = string.toLowerCase();

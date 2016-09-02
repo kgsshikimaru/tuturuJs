@@ -1,42 +1,35 @@
-export default function fuzbuzTask2() {
+export default function () {
 
-	function checkSyntax(string) {
-		try {
-			if (string.length === 0) return "0";     // проверяем только если есть что проверять
+	//  > Изменится ли ваше решение, если нужно проверять только такой набор скобок: <,[,{
+	// - уберу '()' из проверочного списка - чтобы уменьшить количество итераций в цикле, и в регулярном выражении убрал бы: \(|\)
 
-			const onlyBracket = /\(|\)|\{|\}|\[|\]|\<|\>/g;   // оставить только скобки
-			let brackets = string.match(onlyBracket);
+	function checkSyntax(str) {
+		if (typeof str !== 'string') return 1;
+		if (str.length === 0) return 0;
 
-			brackets = brackets.join('');
-			if (brackets.length % 2 === 1) return "1";
+		const onlyBracket = /\(|\)|\{|\}|\[|\]|\<|\>/g;
+		const brackets = str.match(onlyBracket);
+		const check  = ['()', '[]', '{}', '<>'];
 
-			const reg = /\(.*\)|\[.*\]|\{.*\}|\<.*\>/g;   // найти открывающую и закрывающую пару скобок
-
-			brackets = brackets.match(reg);
-			for (let i = 0; i < brackets.length; i ++) {
-				brackets[i] = brackets[i].slice(1, -1);
+		let flag = true;
+		function loop(brackets) {
+			if (brackets.length === 0) return 0;
+			flag = true;
+			for ( let i = 0; i < brackets.length; i++) {
+				for ( let j = 0; j < check.length; j++) {
+					const checkSubStr = brackets[i] + brackets[i + 1];
+					const checkValue = check[j];
+					if (checkSubStr === checkValue) {
+						brackets.splice(i, 2);
+						flag = false;
+					}
+				}
 			}
-			brackets = brackets.join('');
-
-			return checkSyntax(brackets);
-		} catch (e) {
-			return 1
+			if (flag) return 1;
+			return loop(brackets);
 		}
+		return loop(brackets);
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
