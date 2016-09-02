@@ -7,7 +7,7 @@ export default function jsTests() {
 
 	//fuzbuzTask1();
 	//fuzbuzTask2();
-	algorithms();
-	//refactoringTask1();
+	//algorithms();
+	refactoringTask1();
 
 }
