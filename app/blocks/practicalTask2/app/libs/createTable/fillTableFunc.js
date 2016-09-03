@@ -1,6 +1,6 @@
-export default function (data, tbody) {
+export default function (data, tbody, targetPage) {
 	let content = '';
-	for (let value of data) {
+	for (let value of data[targetPage]) {
 		content += `
 						<tr>
 							<td>${value.id}</td>
