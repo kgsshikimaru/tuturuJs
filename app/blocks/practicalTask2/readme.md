@@ -7,19 +7,3 @@
 
 В идеале лучше всего использовать фреймворк, из того с чем я ознакамливался - на
 angularJs можно быстро и почти без JS кода реализовать необходимый функционал.
-
-
-{
-"id": 180,
-"firstName": "Elena",
-"lastName": "Knowles",
-"email": "NPost@ac.net",
-"phone": "(364)171-4175",
-"adress": {
-"streetAddress": "8912 Odio Ave",
-"city": "Sandwich",
-"state": "DE",
-"zip": "14333"
-},
-"description": "mattis sed suspendisse massa donec facilisis nunc tortor ante amet rutrum et lacus lacus id adipiscing risus ac consequat fringilla tellus at mattis consectetur mattis magna molestie massa tincidunt mattis dolor consectetur"
-},

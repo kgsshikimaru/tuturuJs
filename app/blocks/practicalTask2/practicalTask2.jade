@@ -5,10 +5,11 @@ mixin practicalTask2()
 			.row
 				h1.page-header.text-center PracticalTask2
 				h2.sub-header.text-center Sorting table
+					span.js-loading &#9775;
 			.row
-				.container
-					a.col-md-5.btn-success.btn-lg.block-center.js-getJson Получить малый список и создать таблицу
-					a.col-md-5.col-md-push-2.btn-success.btn-lg.block-center.js-getJson Получить большой список и создать таблицу
+				.container.js-watch
+					a(data-url="small").col-md-5.btn-success.btn-lg.block-center.js-getJsonSmall Получить малый список и создать таблицу
+					a(data-url="big").col-md-5.col-md-push-2.btn-success.btn-lg.block-center.js-getJsonBig Получить большой список и создать таблицу
 
 			.row
 				.main
