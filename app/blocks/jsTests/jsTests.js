@@ -6,12 +6,10 @@ import refactoringTask2 from './js/refactoringTask2';
 import practicalTask1 from './js/practicalTask1';
 
 export default function jsTests() {
-
 	//fuzbuzTask1();
 	//fuzbuzTask2();
 	//algorithms();
 	//refactoringTask1();
 	//refactoringTask2();
-	practicalTask1();
-
+	//practicalTask1();
 }
