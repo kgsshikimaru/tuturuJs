@@ -1,14 +1,19 @@
+import motionToCurrentPage from '../watchers/motionToCurrentPage'
 import checkTbodyJquery from '../tableInit/checkTbodyJquery'
 import checkMaxListInTable from '../tableInit/checkMaxListInTable'
 import getJSON from '../libs/ajaxGet/ajaxGet'
 import fillTableFunc from '../libs/createTable/fillTableFunc'
 import preparePaginationPersons from '../libs/createTable/preparePagination'
+import createPaginationFunc from '../libs/createTable/createPaginationFunc'
 
 export default class Table {
 	constructor($tbody, maxList) {
 		this.$tbody = $tbody;
 		this.maxListInTable = maxList;
 		this.currentPage = 1;
+
+		this.watchPagination();
+
 	}
 
 	get $tbody() {
@@ -33,66 +38,23 @@ export default class Table {
 		return getJSON(url, tbody);
 	}
 
+	static createPagination(data, targetPage) {
+		createPaginationFunc(data, targetPage);
+	}
+
 	createTable(url) {
 		Table.ajaxGet(url, this.$tbody)
 			.done ( (data) => {
 				let countPersons = 0;
 				let initFirstPage = 0;
+				let initFirstPagination = 1;
 
 				this.sliceArrPersons = preparePaginationPersons(data, this.maxListInTable, countPersons);
 
-				console.log(this.sliceArrPersons);
-
-				this.createPagination(this.sliceArrPersons, this.currentPage);
+				Table.createPagination(this.sliceArrPersons, initFirstPagination);
 
 				this.fillTable(this.sliceArrPersons, initFirstPage)
 			} )
-	}
-
-	createPagination(data, targetPage) {
-
-
-		function createPaginat (data, targetPage) {
-			let content = '<ul class="pagination">';
-
-			for (let i = 1; i <= data.length; i++) {
-				content += `<li class="${targetPage === i ? 'active' : ''}"><a href="#">${i}</a></li>`;
-			}
-			content += '</ul>';
-			$('.pagination-wrapper').append(content);
-		}
-
-		createPaginat (data, targetPage);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	}
 
@@ -100,5 +62,8 @@ export default class Table {
 		fillTableFunc(data, this.$tbody, targetPage);
 	}
 
-
+	watchPagination() {
+		const self = this;
+		motionToCurrentPage(self);
+	}
 }

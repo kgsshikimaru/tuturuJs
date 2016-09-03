@@ -7,13 +7,13 @@ mixin practicalTask2()
 				h2.sub-header.text-center Sorting table
 					span.js-loading &#9775;
 			.row
-				.container.js-watch
+				.container.js-watchURL
 					a(data-url="small").col-md-5.btn-success.btn-lg.block-center.js-getJsonSmall Получить малый список и создать таблицу
 					a(data-url="big").col-md-5.col-md-push-2.btn-success.btn-lg.block-center.js-getJsonBig Получить большой список и создать таблицу
 
 			.row
 				.main.text-center
-					.pagination-wrapper
+					.pagination-wrapper.js-watchPagination
 					.table-responsive
 						table.table.table-striped.js-table
 							thead
@@ -29,4 +29,4 @@ mixin practicalTask2()
 									th zip
 									th description
 							tbody
-					.pagination-wrapper
+					.pagination-wrapper.js-watchPagination
