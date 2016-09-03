@@ -1,7 +1,7 @@
-export default function (classTable, url) {
+export default function (self, url) {
 
 	$('.js-watchURL').on('click','[data-url]', function (e) {
 		e.preventDefault();
-		classTable.createTable(url[$(this).data().url]);
+		self.createTable(url[$(this).data().url]);
 	})
 }

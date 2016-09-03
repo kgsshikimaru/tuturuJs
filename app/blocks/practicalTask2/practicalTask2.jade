@@ -8,8 +8,8 @@ mixin practicalTask2()
 					span.js-loading &#9775;
 			.row
 				.container.js-watchURL
-					a(data-url="small").col-md-5.btn-success.btn-lg.block-center.js-getJsonSmall Получить малый список и создать таблицу
-					a(data-url="big").col-md-5.col-md-push-2.btn-success.btn-lg.block-center.js-getJsonBig Получить большой список и создать таблицу
+					a(data-url="small").col-md-5.btn-success.btn-lg.block-center Получить малый список и создать таблицу
+					a(data-url="big").col-md-5.col-md-push-2.btn-success.btn-lg.block-center Получить большой список и создать таблицу
 
 			.row
 				.main.text-center
@@ -28,5 +28,5 @@ mixin practicalTask2()
 									th state
 									th zip
 									th description
-							tbody
+							tbody.js-watchCurrentPerson
 					.pagination-wrapper.js-watchPagination

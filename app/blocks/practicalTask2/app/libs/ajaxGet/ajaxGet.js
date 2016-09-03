@@ -1,4 +1,7 @@
 export default function (url, tbody) {
+	$('.js-watchURL').off('click','[data-url]');
+
+
 	tbody.empty().append(`<h1>Загрузка...</h1>`);
 	$('.pagination-wrapper').empty();
 	return $.get(url)

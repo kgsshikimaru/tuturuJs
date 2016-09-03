@@ -1,14 +1,13 @@
 export default function (self) {
-	$('.js-watchPagination').on('click', '[data-id]', function (e) {
+	$('.js-watchPagination').on('click', '[data-pagination-id]', function (e) {
 		e.preventDefault();
 		let $curTarget = $(e.currentTarget);
 
-		if ($curTarget.data().id - 1 === self.currentPage) return;
+		if ($curTarget.data().paginationId - 1 === self.currentPage) return;
 
 		$curTarget.addClass('active').siblings().removeClass('active');
-		self.currentPage = $curTarget.data().id - 1;   // поправка на то что индексация
+		self.currentPage = $curTarget.data().paginationId - 1;   // поправка на то что индексация
 		// массива с досье начинается с 0
-
 
 
 

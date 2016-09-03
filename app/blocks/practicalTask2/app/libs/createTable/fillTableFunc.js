@@ -1,8 +1,9 @@
 export default function (data, tbody, targetPage) {
 	let content = '';
+	let i = 0;
 	for (let value of data[targetPage]) {
 		content += `
-						<tr>
+						<tr data-person-id =${i++}>
 							<td>${value.id}</td>
 							<td>${value.firstName}</td>
 							<td>${value.lastName}</td>
