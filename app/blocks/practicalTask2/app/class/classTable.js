@@ -2,16 +2,19 @@ import createTable from '../watchers/createTable'
 import createTableFunc from '../libs/createTable/createTableFunc'
 import motionToCurrentPage from '../watchers/motionToCurrentPage'
 import getPersonId from '../watchers/getPersonId'
+import checkTheadJquery from '../tableInit/checkTheadJquery'
 import checkTbodyJquery from '../tableInit/checkTbodyJquery'
 import checkMaxListInTable from '../tableInit/checkMaxListInTable'
 import ajaxGetFunc from '../libs/ajaxGet/ajaxGetFunc'
-import fillTableFunc from '../libs/createTable/fillTableFunc'
+import fillTheadFunc from '../libs/createTable/fillTheadFunc'
+import fillTbodyFunc from '../libs/createTable/fillTbodyFunc'
 import createPaginationFunc from '../libs/createTable/createPaginationFunc'
 
 export default class Table {
-	constructor($tbody, maxList, url) {
+	constructor($table, maxList, url) {
 		this.applyUrl = url;
-		this.$tbody = $tbody;
+		this.$thead = $table.find('thead');
+		this.$tbody = $table.find('tbody');
 		this.maxListInTable = maxList;
 		this.timeOut = 20000;
 		this.currentPage = 0;
@@ -24,20 +27,31 @@ export default class Table {
 		this.watchToCreateTable();
 		this.watchPagination();
 		this.watchPersons();
+		this.watchSortingWay()
+	}
+
+	get $thead() {
+		return this._$thead;
+	}
+
+	set $thead($thead) {
+		const self = this;
+		checkTheadJquery($thead, self);
 	}
 
 	get $tbody() {
 		return this._$tbody;
 	}
 
-	get maxListInTable() {
-		return this._maxListInTable;
-	}
-
 	set $tbody($tbody) {
 		const self = this;
 		checkTbodyJquery($tbody, self);
 	}
+
+	get maxListInTable() {
+		return this._maxListInTable;
+	}
+
 
 	set maxListInTable(maxListInTable) {
 		const self = this;
@@ -61,7 +75,9 @@ export default class Table {
 
 	fillTable(data, targetPage) {
 		const self = this;
-		fillTableFunc(data, this.$tbody, targetPage, self);
+
+		fillTheadFunc(data, this.$thead);
+		fillTbodyFunc(data, this.$tbody, targetPage, self);
 	}
 
 	watchToCreateTable() {
@@ -77,8 +93,35 @@ export default class Table {
 	watchPersons() {
 		const self = this;
 		getPersonId(self);
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	}
+
+	watchSortingWay() {
+
+
+
+		$('.js-renderSortWay-container').on('click','th', function (e) {
+			e.preventDefault();
+			console.log(e)
+			console.log(e.target.cellIndex)
+		})
+
+
+
+
+
+
+
+
+
+
+
+
+
+	}
+
+
+
+
+
+
 }

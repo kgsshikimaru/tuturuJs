@@ -15,6 +15,6 @@ export default function createTableFunc(url, self) {
 			self.createPagination(self.dataSplitToPagination, initFirstPagination);
 
 			self.fillTable(self.dataSplitToPagination, self.currentPage);
-			self.watchToCreateTable()
+			self.watchToCreateTable();   // возобновляем возможность запросов на сервер
 		} )
 }

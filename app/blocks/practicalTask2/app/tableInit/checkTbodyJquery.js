@@ -4,7 +4,7 @@ export default function ($tbody, self) {
 			self._$tbody = $tbody
 
 		} else {
-			throw new Error(`неправильный аргумент ${$tbody}: нужно указать тело таблицы - объект jQuery `)
+			throw new Error(`в передаваемом объекте нет  ${$tbody}: нужно указать таблицу - объект jQuery`)
 		}
 	} catch (e) {
 		console.log(e.message);
