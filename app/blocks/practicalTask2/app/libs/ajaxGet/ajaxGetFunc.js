@@ -6,9 +6,9 @@ export default function (url,thead, tbody, self) {
 
 	thead.empty();  // очистить предудущую таблицу
 	tbody.empty();  // очистить предудущую таблицу
-	$h1.empty().append(`Загрузка...`);
-	self.loadingTimer = setInterval(() => {
-		$h1.append(`.`);
+	$h1.empty().append('<h3>Загрузка</h3>');
+	self.loadingAjaxTimer = setInterval(() => {
+		$h1.append('<span>.</span>');
 	}, 500);
 	$('.pagination-wrapper').empty();
 
@@ -18,7 +18,7 @@ export default function (url,thead, tbody, self) {
 		timeout: self.timeOut
 	})
 		.fail(function(e) {
-			clearInterval(self.loadingTimer);
+			clearInterval(self.loadingAjaxTimer);
 			clearInterval(self.timeOut);
 			console.log(e);
 			console.log(e.statusText);

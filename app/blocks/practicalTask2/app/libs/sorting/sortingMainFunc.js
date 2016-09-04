@@ -1,4 +1,5 @@
 import fillTbodyFunc from '../createTable/fillTbodyFunc'
+import sortLoading from './sortLoading'
 import preparePaginationPersons from '../createTable/preparePaginationPersons'
 import {sortingNumberIncreasing} from './sortingNumberIncreasing'
 import {sortingNumberDecreasing} from './sortingNumberDecreasing'
@@ -11,8 +12,15 @@ export default function (self) {
 	sortingStringIncreasing.self = self;
 	sortingStringDecreasing.self = self;
 
-	$('.js-renderSortWay-container').on('click','[data-title-type-value]', function (e) {
+	let setWatcher = $('.js-renderSortWay-container');
+	setWatcher.on('click','[data-title-type-value]', MainSortingAction);
+
+	function MainSortingAction (e) {
+		setWatcher.off('click','[data-title-type-value]');
 		e.preventDefault();
+
+		sortLoading(self);
+
 		let $target = $(e.currentTarget);
 		let currentTargetType = $target.data().titleTypeValue;
 
@@ -51,12 +59,14 @@ export default function (self) {
 			$target.removeClass('js-arrow-up').addClass('js-arrow-down');
 		}
 		let countPersons = 0;
-		console.log(self.filteredDataNotPagination);
 		self.dataSplitToPagination = preparePaginationPersons(self.filteredDataNotPagination,self.maxListInTable, countPersons );
 		fillTbodyFunc(self.dataSplitToPagination, self.$tbody, self.currentPage, self);
-	})
 
 
+		clearInterval(self.sortLoadingTimer);
+		$('.js-sort-loading').empty().html('Sorting table');
+		setWatcher.on('click','[data-title-type-value]', MainSortingAction)
+	}
 
 
 

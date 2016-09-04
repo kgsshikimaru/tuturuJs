@@ -18,7 +18,7 @@ export default function (data, tbody, targetPage, self) {
 						`;
 	}
 	clearTimeout(self.timeOutCounter) ;
-	clearInterval(self.loadingTimer);
+	clearInterval(self.loadingAjaxTimer);
 	$('.js-loading').empty();
 	tbody.empty().append(content)
 }

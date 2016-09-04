@@ -51,15 +51,17 @@ export default function (data, thead) {
 
 				if (oldHystoryIndexStart === -1) oldHystoryIndexFinish = 0;
 				deepHistory = deepHistory.slice(oldHystoryIndexStart, oldHystoryIndexFinish + 1);
-
-
-
-
 			} else {
+				let formatKey = key
+								.replace(/([A-Z])/g, ' $1')
+								.replace(/^./, function(str){ return str.toUpperCase(); });
 				let FirstSymbolNumber = isNaN(parseInt(dataJson[key]));
 				content += `
-							<th data-json-deep-history=${deepHistory + key} data-title-type-value=${ FirstSymbolNumber === true ? 'string' : 'number' }>${key}
-								<span class="js-renderSortWay"></span></th>
+							<th data-json-deep-history=${deepHistory + key}
+							 data-title-type-value=${ FirstSymbolNumber === true ? 'string' : 'number' }>
+							${formatKey}
+								<span class="js-renderSortWay"></span>
+							</th>
 							`;
 			}
 		}

@@ -23,7 +23,8 @@ export default class Table {
 		this.filteredDataNotPagination = null;
 		this.dataSplitToPagination = null;
 		this.targetPerson = null;
-		this.loadingTimer = null;
+		this.loadingAjaxTimer = null;
+		this.sortLoadingTimer = null;
 		this.currentJsonKey = null;
 
 		this.watchToCreateTable();
