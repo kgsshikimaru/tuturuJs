@@ -9,6 +9,7 @@ import ajaxGetFunc from '../libs/ajaxGet/ajaxGetFunc'
 import fillTheadFunc from '../libs/createTable/fillTheadFunc'
 import fillTbodyFunc from '../libs/createTable/fillTbodyFunc'
 import createPaginationFunc from '../libs/createTable/createPaginationFunc'
+import sortingMainFunc from '../libs/sorting/sortingMainFunc'
 
 export default class Table {
 	constructor($table, maxList, url) {
@@ -23,6 +24,7 @@ export default class Table {
 		this.dataSplitToPagination = null;
 		this.targetPerson = null;
 		this.loadingTimer = null;
+		this.currentJsonKey = null;
 
 		this.watchToCreateTable();
 		this.watchPagination();
@@ -59,9 +61,9 @@ export default class Table {
 	}
 
 
-	ajaxGet(url, tbody) {
+	ajaxGet(url,thead, tbody) {
 		const self = this;
-		return ajaxGetFunc(url, tbody, self);
+		return ajaxGetFunc(url, thead, tbody, self);
 	}
 
 	createPagination(data, targetPage) {
@@ -96,32 +98,8 @@ export default class Table {
 	}
 
 	watchSortingWay() {
-
-
-
-		$('.js-renderSortWay-container').on('click','th', function (e) {
-			e.preventDefault();
-			console.log(e)
-			console.log(e.target.cellIndex)
-		})
-
-
-
-
-
-
-
-
-
-
-
-
+		const self = this;
+		sortingMainFunc(self);
 
 	}
-
-
-
-
-
-
 }

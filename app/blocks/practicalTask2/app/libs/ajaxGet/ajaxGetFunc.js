@@ -1,9 +1,10 @@
-export default function (url, tbody, self) {
+export default function (url,thead, tbody, self) {
 	$('.js-watchURL').off('click', '[data-url]');  // заблокировать возможность спама сервера во время долгого запроса
 	$('.js-targetPersonContainer').empty();// очистить выбранное досье из предыдущей таблицы
 
 	const $h1 = $('.js-loading');
 
+	thead.empty();  // очистить предудущую таблицу
 	tbody.empty();  // очистить предудущую таблицу
 	$h1.empty().append(`Загрузка...`);
 	self.loadingTimer = setInterval(() => {

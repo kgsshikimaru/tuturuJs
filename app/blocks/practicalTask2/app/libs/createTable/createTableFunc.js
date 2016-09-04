@@ -2,7 +2,7 @@ import preparePaginationPersons from './preparePaginationPersons'
 
 export default function createTableFunc(url, self) {
 
-	self.ajaxGet(url, self.$tbody)
+	self.ajaxGet(url,self.$thead, self.$tbody)
 		.done ( (data) => {
 			let countPersons = 0;
 			self.currentPage = 0;

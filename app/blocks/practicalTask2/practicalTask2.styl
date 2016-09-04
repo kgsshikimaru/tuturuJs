@@ -3,3 +3,20 @@
 
 .js-targetPersonContainer
 	font-size 2rem
+
+.js-arrow-up
+	position: relative
+
+	span.js-renderSortWay
+		&::after
+			position: absolute
+			top -5px
+			content "▲"
+.js-arrow-down
+	position: relative
+
+	span.js-renderSortWay
+		&::after
+			position: absolute
+			top -5px
+			content "▼"
