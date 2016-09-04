@@ -2,7 +2,7 @@ import createTable from '../watchers/createTable'
 import motionToCurrentPage from '../watchers/motionToCurrentPage'
 import checkTbodyJquery from '../tableInit/checkTbodyJquery'
 import checkMaxListInTable from '../tableInit/checkMaxListInTable'
-import getJSON from '../libs/ajaxGet/ajaxGet'
+import ajaxGetFunc from '../libs/ajaxGet/ajaxGetFunc'
 import fillTableFunc from '../libs/createTable/fillTableFunc'
 import preparePaginationPersons from '../libs/createTable/preparePagination'
 import createPaginationFunc from '../libs/createTable/createPaginationFunc'
@@ -16,6 +16,7 @@ export default class Table {
 		this.dataNotPagination = null;
 		this.sliceArrPersons = null;
 		this.targetPerson = null;
+		self.loadingTimer = null;
 
 		this.watchToCreateTable();
 		this.watchPagination();
@@ -41,8 +42,9 @@ export default class Table {
 	}
 
 
-	static ajaxGet(url, tbody) {
-		return getJSON(url, tbody);
+	ajaxGet(url, tbody) {
+		const self = this;
+		return ajaxGetFunc(url, tbody, self);
 	}
 
 	static createPagination(data, targetPage) {
@@ -50,7 +52,7 @@ export default class Table {
 	}
 
 	createTable(url) {
-		Table.ajaxGet(url, this.$tbody)
+		this.ajaxGet(url, this.$tbody)
 			.done ( (data) => {
 				let countPersons = 0;
 				let initFirstPage = 0;
@@ -67,7 +69,8 @@ export default class Table {
 	}
 
 	fillTable(data, targetPage) {
-		fillTableFunc(data, this.$tbody, targetPage);
+		const self = this;
+		fillTableFunc(data, this.$tbody, targetPage, self);
 	}
 
 	watchToCreateTable() {

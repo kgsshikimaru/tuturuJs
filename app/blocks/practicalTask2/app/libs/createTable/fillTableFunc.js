@@ -1,4 +1,4 @@
-export default function (data, tbody, targetPage) {
+export default function (data, tbody, targetPage, self) {
 	let content = '';
 	let i = 0;
 	for (let value of data[targetPage]) {
@@ -17,5 +17,7 @@ export default function (data, tbody, targetPage) {
 						</tr>
 						`;
 	}
+	clearInterval(self.loadingTimer);
+	$('.js-loading').empty();
 	tbody.empty().append(content)
 }

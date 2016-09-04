@@ -5,7 +5,6 @@ mixin practicalTask2()
 			.row
 				h1.page-header.text-center PracticalTask2
 				h2.sub-header.text-center Sorting table
-					span.js-loading &#9775;
 			.row
 				.container.js-watchURL
 					a(data-url="small").col-md-5.btn-success.btn-lg.block-center Получить малый список и создать таблицу
@@ -14,6 +13,7 @@ mixin practicalTask2()
 			.row
 				.main.text-center
 					.pagination-wrapper.js-watchPagination
+					h1.js-loading
 					.table-responsive
 						table.table.table-striped.js-table
 							thead
