@@ -1,11 +1,11 @@
 import createTable from '../watchers/createTable'
+import createTableFunc from '../libs/createTable/createTableFunc'
 import motionToCurrentPage from '../watchers/motionToCurrentPage'
 import getPersonId from '../watchers/getPersonId'
 import checkTbodyJquery from '../tableInit/checkTbodyJquery'
 import checkMaxListInTable from '../tableInit/checkMaxListInTable'
 import ajaxGetFunc from '../libs/ajaxGet/ajaxGetFunc'
 import fillTableFunc from '../libs/createTable/fillTableFunc'
-import preparePaginationPersons from '../libs/createTable/preparePagination'
 import createPaginationFunc from '../libs/createTable/createPaginationFunc'
 
 export default class Table {
@@ -13,6 +13,7 @@ export default class Table {
 		this.applyUrl = url;
 		this.$tbody = $tbody;
 		this.maxListInTable = maxList;
+		this.timeOut = 20000;
 		this.currentPage = 0;
 		this.dataNotPagination = null;
 		this.filteredDataNotPagination = null;
@@ -49,26 +50,13 @@ export default class Table {
 		return ajaxGetFunc(url, tbody, self);
 	}
 
-	static createPagination(data, targetPage) {
+	createPagination(data, targetPage) {
 		createPaginationFunc(data, targetPage);
 	}
 
 	createTable(url) {
-		this.ajaxGet(url, this.$tbody)
-			.done ( (data) => {
-				let countPersons = 0;
-				this.currentPage = 0;
-				let initFirstPagination = 1;
-
-				this.dataNotPagination = data;
-				this.filteredDataNotPagination = data;
-				this.dataSplitToPagination = preparePaginationPersons(data, this.maxListInTable, countPersons);
-
-				Table.createPagination(this.dataSplitToPagination, initFirstPagination);
-
-				this.fillTable(this.dataSplitToPagination, this.currentPage);
-				this.watchToCreateTable()
-			} )
+		const self = this;
+		createTableFunc(url, self);
 	}
 
 	fillTable(data, targetPage) {
