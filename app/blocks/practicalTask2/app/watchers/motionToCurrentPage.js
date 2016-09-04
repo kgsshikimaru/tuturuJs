@@ -4,13 +4,14 @@ export default function (self) {
 		let $curTarget = $(e.currentTarget);
 
 		if ($curTarget.data().paginationId - 1 === self.currentPage) return;
+		let dataId =$curTarget.data().paginationId;
 
-		$curTarget.addClass('active').siblings().removeClass('active');
-		self.currentPage = $curTarget.data().paginationId - 1;   // поправка на то что индексация
-		// массива с досье начинается с 0
+		//Синхронизация пагинаций вверху и внизу страницы
+		$(`[data-pagination-id=${dataId}]`).addClass('active').siblings().removeClass('active');
 
+		// поправка на то что индексация массива со списком досье начинается с 0
+		self.currentPage = $curTarget.data().paginationId - 1;
 
-
-		self.fillTable(self.sliceArrPersons, self.currentPage)
+		self.fillTable(self.dataSplitToPagination, self.currentPage)
 	})
 }

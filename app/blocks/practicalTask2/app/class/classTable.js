@@ -1,5 +1,6 @@
 import createTable from '../watchers/createTable'
 import motionToCurrentPage from '../watchers/motionToCurrentPage'
+import getPersonId from '../watchers/getPersonId'
 import checkTbodyJquery from '../tableInit/checkTbodyJquery'
 import checkMaxListInTable from '../tableInit/checkMaxListInTable'
 import ajaxGetFunc from '../libs/ajaxGet/ajaxGetFunc'
@@ -14,9 +15,10 @@ export default class Table {
 		this.maxListInTable = maxList;
 		this.currentPage = 0;
 		this.dataNotPagination = null;
-		this.sliceArrPersons = null;
+		this.filteredDataNotPagination = null;
+		this.dataSplitToPagination = null;
 		this.targetPerson = null;
-		self.loadingTimer = null;
+		this.loadingTimer = null;
 
 		this.watchToCreateTable();
 		this.watchPagination();
@@ -55,15 +57,16 @@ export default class Table {
 		this.ajaxGet(url, this.$tbody)
 			.done ( (data) => {
 				let countPersons = 0;
-				let initFirstPage = 0;
+				this.currentPage = 0;
 				let initFirstPagination = 1;
 
 				this.dataNotPagination = data;
-				this.sliceArrPersons = preparePaginationPersons(data, this.maxListInTable, countPersons);
+				this.filteredDataNotPagination = data;
+				this.dataSplitToPagination = preparePaginationPersons(data, this.maxListInTable, countPersons);
 
-				Table.createPagination(this.sliceArrPersons, initFirstPagination);
+				Table.createPagination(this.dataSplitToPagination, initFirstPagination);
 
-				this.fillTable(this.sliceArrPersons, initFirstPage);
+				this.fillTable(this.dataSplitToPagination, this.currentPage);
 				this.watchToCreateTable()
 			} )
 	}
@@ -86,23 +89,8 @@ export default class Table {
 	watchPersons() {
 		const self = this;
 		getPersonId(self);
-		function getPersonId(self) {
-			$('.js-watchCurrentPerson').on('click', '[data-person-id]', function (e) {
-				e.preventDefault();
-				let $curTarget = $(e.currentTarget);
-				$curTarget.addClass('active').siblings().removeClass('active');
 
 
-				let targetPersonNum = self.maxListInTable * self.currentPage + $curTarget.data().personId;
-				self.targetPerson = self.dataNotPagination[targetPersonNum];
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-				console.log(self.targetPerson);
-				renderTargetPersonInfo(self.targetPerson)
-			})
-		}
-		function renderTargetPersonInfo(targetPerson) {
-
-		}
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	}
 }

@@ -17,7 +17,7 @@ export default function (data, tbody, targetPage, self) {
 						</tr>
 						`;
 	}
-	clearInterval(self.loadingTimer);
-	$('.js-loading').empty();
+	clearInterval(self.loadingTimer);      // остановить анимацию загрузи
+	$('.js-loading').empty();              // убрать загрузку
 	tbody.empty().append(content)
 }
