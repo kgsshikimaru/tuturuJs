@@ -21,22 +21,23 @@ export default function (self) {
 			let lowerSearchValue = searchValue.toLowerCase();
 			self.filteredDataNotPagination = [];
 
-
 			for (let i = 0; i < self.dataNotPagination.length; i++) {
 
 				function createArrFromFindSubst(dataJson) {
 
 					for (let key in dataJson) {
-						if (typeof dataJson[key] === 'object') {
+						if (dataJson.hasOwnProperty(key)) {
+							if (typeof dataJson[key] === 'object') {
 
-							return createArrFromFindSubst(dataJson[key]);
-						} else {
-							dataJson[key] += '';
-							let lowerValue = dataJson[key].toLowerCase();
+								return createArrFromFindSubst(dataJson[key]);
+							} else {
+								dataJson[key] += '';
+								let lowerValue = dataJson[key].toLowerCase();
 
-							if (lowerValue.indexOf(lowerSearchValue) !== -1) {
-								notFind = false;
-								return true
+								if (lowerValue.indexOf(lowerSearchValue) !== -1) {
+									notFind = false;
+									return true
+								}
 							}
 						}
 					}
@@ -49,7 +50,6 @@ export default function (self) {
 			}
 		}
 
-
 		if (notFind === true) {
 			$(self.$tbody).empty().append('<h2>По вашему запросу ничего не найдено</h2>')
 		} else {
@@ -61,91 +61,5 @@ export default function (self) {
 			self.createPagination(self.dataSplitToPagination, initFirstPagination);
 			fillTbodyFunc(self.dataSplitToPagination, self.$tbody, self.currentPage, self);
 		}
-
-
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

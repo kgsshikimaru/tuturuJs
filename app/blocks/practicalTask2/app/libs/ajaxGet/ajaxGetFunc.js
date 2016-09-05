@@ -14,7 +14,6 @@ export default function (url,thead, tbody, self) {
 		$h1.append('<span>.</span>');
 	}, 500);
 
-
 	return $.ajax({
 		type: "GET",
 		url: url,

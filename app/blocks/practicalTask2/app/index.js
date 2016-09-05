@@ -1,6 +1,5 @@
 import Table from './class/classTable'
 
-
 export default function () {
 
 	const url ={
@@ -12,53 +11,6 @@ export default function () {
 
 
 	const classTable = new Table($table, maxListInTable, url);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
 

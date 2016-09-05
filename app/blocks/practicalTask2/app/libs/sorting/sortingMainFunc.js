@@ -53,55 +53,8 @@ export default function (self) {
 		self.dataSplitToPagination = preparePaginationPersons(listPersons,self.maxListInTable, countPersons );
 		fillTbodyFunc(self.dataSplitToPagination, self.$tbody, self.currentPage, self);
 
-
 		clearInterval(self.sortLoadingTimer);
-		$('.js-sort-loading').empty().html('Sorting table');
+		$('.js-sort-loading').empty().html('Table');
 		setWatcher.on('click','[data-title-type-value]', MainSortingAction)
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

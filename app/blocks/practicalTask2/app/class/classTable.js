@@ -56,12 +56,10 @@ export default class Table {
 		return this._maxListInTable;
 	}
 
-
 	set maxListInTable(maxListInTable) {
 		const self = this;
 		checkMaxListInTable(maxListInTable, self);
 	}
-
 
 	ajaxGet(url,thead, tbody) {
 		const self = this;
