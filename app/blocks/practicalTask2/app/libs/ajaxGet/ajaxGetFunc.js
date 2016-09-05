@@ -6,11 +6,14 @@ export default function (url,thead, tbody, self) {
 
 	thead.empty();  // очистить предудущую таблицу
 	tbody.empty();  // очистить предудущую таблицу
+	$('.js-searchForm-wrapper').empty(); // очистить предыдущую форму поиска (полностью убрать на время загрузки)
+	$('.pagination-wrapper').empty(); // очистить пагинацию предудуей таблицы
+
 	$h1.empty().append('<h3>Загрузка</h3>');
 	self.loadingAjaxTimer = setInterval(() => {
 		$h1.append('<span>.</span>');
 	}, 500);
-	$('.pagination-wrapper').empty();
+
 
 	return $.ajax({
 		type: "GET",

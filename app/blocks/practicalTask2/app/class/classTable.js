@@ -1,5 +1,6 @@
 import createTable from '../watchers/createTable'
 import createTableFunc from '../libs/createTable/createTableFunc'
+import createSearchFormFunc from '../libs/createSearchForm/createSearchFormFunc'
 import motionToCurrentPage from '../watchers/motionToCurrentPage'
 import getPersonId from '../watchers/getPersonId'
 import checkTheadJquery from '../tableInit/checkTheadJquery'
@@ -10,6 +11,7 @@ import fillTheadFunc from '../libs/createTable/fillTheadFunc'
 import fillTbodyFunc from '../libs/createTable/fillTbodyFunc'
 import createPaginationFunc from '../libs/createTable/createPaginationFunc'
 import sortingMainFunc from '../libs/sorting/sortingMainFunc'
+import filtrationTableValueFunc from '../libs/filtration/filtrationTableValueFunc'
 
 export default class Table {
 	constructor($table, maxList, url) {
@@ -28,9 +30,8 @@ export default class Table {
 		this.currentJsonKey = null;
 
 		this.watchToCreateTable();
-		this.watchPagination();
 		this.watchPersons();
-		this.watchSortingWay()
+		this.watchSortingWay();
 	}
 
 	get $thead() {
@@ -71,6 +72,10 @@ export default class Table {
 		createPaginationFunc(data, targetPage);
 	}
 
+	createSearchForm() {
+		createSearchFormFunc()
+	}
+
 	createTable(url) {
 		const self = this;
 		createTableFunc(url, self);
@@ -78,7 +83,6 @@ export default class Table {
 
 	fillTable(data, targetPage) {
 		const self = this;
-
 		fillTheadFunc(data, this.$thead);
 		fillTbodyFunc(data, this.$tbody, targetPage, self);
 	}
@@ -101,6 +105,10 @@ export default class Table {
 	watchSortingWay() {
 		const self = this;
 		sortingMainFunc(self);
+	}
 
+	watchFiltration() {
+		const self = this;
+		filtrationTableValueFunc(self);
 	}
 }

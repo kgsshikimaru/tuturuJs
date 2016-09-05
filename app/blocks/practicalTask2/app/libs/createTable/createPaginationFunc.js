@@ -5,5 +5,5 @@ export default function (data, targetPage) {
 		content += `<li data-pagination-id="${i}" class="${targetPage === i ? 'active' : ''}"><a href="#">${i}</a></li>`;
 	}
 	content += '</ul>';
-	$('.pagination-wrapper').append(content);
+	$('.pagination-wrapper').empty().append(content);
 }

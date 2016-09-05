@@ -28,38 +28,29 @@ export default function (self) {
 		 * Я не сумел придумать другого способа кроме как, eval()
 		 * чтобы можно было добираться не неизвестную глубину объектов с заранее не предопределенными свойствами
 		 * например data[firstDeep][secondDeep][...]...
-		 * Я так понимаю если обезопасить от ` и не пускать строки больше 50 символов,
-		 * плюс доступ внутрь только через свойство объекта и в замыкании + внутри if
+		 * перед использованием eval(), предварительные проверки
 		 * */
-
 		self.currentJsonKey = $target.data().jsonDeepHistory;
 		self.currentJsonKey = self.currentJsonKey.replace( /\|/g, '"]["');
 		self.currentJsonKey = '["' + self.currentJsonKey + '"]';
-		if (self.currentJsonKey.indexOf("`") !== -1  ||  self.currentJsonKey.length > 50) throw new Error();
+		if (self.currentJsonKey.indexOf("`") !== -1  ||  self.currentJsonKey.length > 50  ||  self.currentJsonKey.indexOf("${") !== -1) {
+			throw new Error();
+		}
 
-
-
+		let listPersons = self.filteredDataNotPagination;
 
 		$target.siblings().removeClass('js-arrow-up js-arrow-down');
 
 		if ($target.hasClass('js-arrow-up') === false) {
-
-			if (currentTargetType === 'number') {
-				self.filteredDataNotPagination.sort(sortingNumberIncreasing);
-			} else {
-				self.filteredDataNotPagination.sort(sortingStringIncreasing);
-			}
+			currentTargetType === 'number' ? listPersons.sort(sortingNumberIncreasing) : listPersons.sort(sortingStringIncreasing);
 			$target.removeClass('js-arrow-down').addClass('js-arrow-up');
 		} else {
-			if (currentTargetType === 'number') {
-				self.filteredDataNotPagination.sort(sortingNumberDecreasing);
-			} else {
-				self.filteredDataNotPagination.sort(sortingStringDecreasing);
-			}
+			currentTargetType === 'number' ? listPersons.sort(sortingNumberDecreasing) : listPersons.sort(sortingStringDecreasing);
+
 			$target.removeClass('js-arrow-up').addClass('js-arrow-down');
 		}
 		let countPersons = 0;
-		self.dataSplitToPagination = preparePaginationPersons(self.filteredDataNotPagination,self.maxListInTable, countPersons );
+		self.dataSplitToPagination = preparePaginationPersons(listPersons,self.maxListInTable, countPersons );
 		fillTbodyFunc(self.dataSplitToPagination, self.$tbody, self.currentPage, self);
 
 

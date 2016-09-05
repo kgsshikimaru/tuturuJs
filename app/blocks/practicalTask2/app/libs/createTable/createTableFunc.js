@@ -13,6 +13,10 @@ export default function createTableFunc(url, self) {
 			self.dataSplitToPagination = preparePaginationPersons(data, self.maxListInTable, countPersons);
 
 			self.createPagination(self.dataSplitToPagination, initFirstPagination);
+			self.watchPagination();
+
+			self.createSearchForm();
+			self.watchFiltration();
 
 			self.fillTable(self.dataSplitToPagination, self.currentPage);
 			self.watchToCreateTable();   // возобновляем возможность запросов на сервер

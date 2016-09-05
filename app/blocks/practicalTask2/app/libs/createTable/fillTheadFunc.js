@@ -30,6 +30,7 @@ export default function (data, thead) {
 
 
 
+
 	content += '</tr>';
 	thead.empty().append(content);
 
